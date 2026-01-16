@@ -120,11 +120,14 @@ require_once INCLUDES_PATH . '/auth_functions.php';
 require_once INCLUDES_PATH . '/db_functions.php';
 require_once INCLUDES_PATH . '/helpers.php';
 
-// Проверка авторизации
-$public_pages = ['login.php', 'logout.php', 'index.php'];
+// Проверка авторизации (пропускаем для test_db.php и публичных страниц)
+$public_pages = ['login.php', 'logout.php', 'index.php', 'test_db.php'];
 $current_page = basename($_SERVER['PHP_SELF']);
 
-if (!in_array($current_page, $public_pages) && !is_admin_logged_in()) {
+// Пропускаем проверку для test_db.php
+if ($current_page === 'test_db.php') {
+    // Ничего не делаем
+} elseif (!in_array($current_page, $public_pages) && !is_admin_logged_in()) {
     header('Location: ../login.php');
     exit;
 }

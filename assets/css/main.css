@@ -1,209 +1,606 @@
-/**
- * Основные стили админ-панели
- */
-
-/* Общие стили */
+/* Основные стили в серо-черной гамме */
 :root {
-    --sidebar-width: 250px;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #343a40;
+    --gray-900: #111827;
+    --sidebar-width: 280px;
     --primary-color: #0d6efd;
-    --secondary-color: #6c757d;
-    --success-color: #198754;
-    --info-color: #0dcaf0;
-    --warning-color: #ffc107;
     --danger-color: #dc3545;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+}
+
+/* Основные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.875rem;
-    background-color: #f8f9fa;
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--gray-50);
+    color: var(--gray-900);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
 }
 
-/* Сайдбар */
-.sidebar {
-    width: var(--sidebar-width);
-    background-color: #212529;
-    color: #fff;
+/* Непрокручиваемый сайдбар */
+.sidebar-container {
     position: fixed;
-    height: 100vh;
-    overflow-y: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
     z-index: 1000;
 }
 
-.sidebar .nav-link {
-    color: #adb5bd;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    margin-bottom: 0.25rem;
+/* Сайдбар фиксированной ширины */
+.sidebar-fixed {
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: var(--gray-900);
+    color: white;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 1.5rem 0;
 }
 
-.sidebar .nav-link:hover,
-.sidebar .nav-link.active {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.1);
+/* Отключаем прокрутку сайдбара */
+.sidebar-fixed {
+    overflow: hidden !important;
 }
 
-.sidebar .nav-link.active {
-    background-color: var(--primary-color);
+.sidebar-fixed:hover {
+    overflow-y: auto !important;
 }
 
-/* Основной контент */
-main {
-    margin-left: var(--sidebar-width);
-    padding: 20px;
+/* Основной контент с отступом */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
     min-height: 100vh;
+    overflow-y: auto;
+    background-color: var(--gray-50);
+}
+
+/* Шапка сайдбара */
+.sidebar-header {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-logo {
+    max-width: 180px;
+    height: auto;
+}
+
+/* Информация о пользователе */
+.user-info {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background-color: var(--gray-600);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+/* Навигация */
+.nav-pills {
+    padding: 0 1rem;
+}
+
+.nav-link {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    margin-bottom: 0.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.nav-link.active {
+    background-color: var(--gray-700);
+    color: white !important;
+}
+
+.nav-link i {
+    width: 24px;
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+}
+
+/* Бейджи в навигации */
+.nav-link .badge {
+    margin-left: auto;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+}
+
+/* Кнопка выхода */
+.btn-logout {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: rgba(220, 53, 69, 0.3);
+    color: #ff6b6b;
+}
+
+/* Верхняя панель */
+.top-bar {
+    background-color: white;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.page-title h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0;
+}
+
+.page-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Контент страницы */
+.content-container {
+    padding: 1.5rem;
 }
 
 /* Карточки */
 .card {
     border: none;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
 .card-header {
-    background-color: rgba(0, 0, 0, 0.03);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: white;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 1rem 1.5rem;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.card-header h5 {
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Статистические карточки */
+.stat-card {
+    border-left: 4px solid;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card .card-body {
+    padding: 1.25rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.2;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* Таблицы */
-.table th {
+.table {
+    color: var(--gray-700);
+}
+
+.table thead th {
+    background-color: var(--gray-50);
+    border-bottom: 2px solid var(--gray-200);
+    color: var(--gray-900);
     font-weight: 600;
-    border-top: none;
-    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
 }
 
-.table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.02);
+.table tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--gray-100);
 }
 
-/* Бейджи */
+.table tbody tr:hover {
+    background-color: var(--gray-50);
+}
+
+/* Бейджи статусов */
 .badge {
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
     font-weight: 500;
-    padding: 0.35em 0.65em;
+    font-size: 0.75rem;
+}
+
+.bg-gray-600 {
+    background-color: var(--gray-600) !important;
+}
+
+.bg-gray-500 {
+    background-color: var(--gray-500) !important;
 }
 
 /* Кнопки */
 .btn {
-    border-radius: 0.25rem;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
     font-weight: 500;
+    transition: all 0.2s;
+    border: none;
 }
 
-.btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-}
-
-/* Формы */
-.form-control:focus,
-.form-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-/* Аватары */
-.avatar-circle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight: bold;
+.btn-dark {
+    background-color: var(--gray-900);
     color: white;
 }
 
-.avatar-sm {
+.btn-dark:hover {
+    background-color: var(--gray-800);
+    color: white;
+}
+
+.btn-outline-dark {
+    color: var(--gray-700);
+    border: 1px solid var(--gray-300);
+    background: transparent;
+}
+
+.btn-outline-dark:hover {
+    background-color: var(--gray-100);
+    border-color: var(--gray-400);
+    color: var(--gray-900);
+}
+
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+/* Уведомления */
+.alert-gray {
+    background-color: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    color: var(--gray-800);
+    border-radius: 6px;
+}
+
+.alert-gray .bi {
+    color: var(--gray-600);
+}
+
+/* Прогресс-бар */
+.progress {
+    background-color: var(--gray-200);
+    border-radius: 3px;
+    height: 6px;
+}
+
+.progress-bar {
+    background-color: var(--gray-900);
+    border-radius: 3px;
+}
+
+/* Кастомный скроллбар */
+.sidebar-fixed::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-fixed::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-fixed::-webkit-scrollbar-thumb {
+    background: var(--gray-700);
+    border-radius: 2px;
+}
+
+.main-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: var(--gray-300);
+    border-radius: 4px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-400);
+}
+
+/* Мобильная адаптация */
+@media (max-width: 991.98px) {
+    .sidebar-container {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .top-bar {
+        margin-top: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .page-title h1 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+/* Утилиты */
+.text-gray-600 {
+    color: var(--gray-600) !important;
+}
+
+.text-gray-700 {
+    color: var(--gray-700) !important;
+}
+
+.text-gray-900 {
+    color: var(--gray-900) !important;
+}
+
+.bg-gray-50 {
+    background-color: var(--gray-50) !important;
+}
+
+.bg-gray-100 {
+    background-color: var(--gray-100) !important;
+}
+
+.bg-gray-200 {
+    background-color: var(--gray-200) !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--gray-200) !important;
+}
+
+/* Заголовки разделов */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+/* Аватар пользователя в верхней панели */
+.user-avatar-sm {
     width: 32px;
     height: 32px;
-    font-size: 14px;
-}
-
-.avatar-md {
-    width: 48px;
-    height: 48px;
-    font-size: 18px;
-}
-
-.avatar-lg {
-    width: 64px;
-    height: 64px;
-    font-size: 24px;
-}
-
-/* Статусы */
-.status-badge {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
     border-radius: 50%;
-    margin-right: 5px;
+    background-color: var(--gray-700);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-.status-active { background-color: var(--success-color); }
-.status-inactive { background-color: var(--secondary-color); }
-.status-pending { background-color: var(--warning-color); }
-.status-blocked { background-color: var(--danger-color); }
-
-/* Анимации */
-.fade-in {
-    animation: fadeIn 0.3s ease-in;
+/* Поиск в верхней панели */
+.search-box {
+    max-width: 300px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.search-box .form-control {
+    background-color: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    padding: 0.375rem 0.75rem;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    main {
-        margin-left: 0;
-        padding: 15px;
-    }
-
-    .card {
-        margin-bottom: 15px;
-    }
+.search-box .form-control:focus {
+    background-color: white;
+    border-color: var(--gray-400);
+    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.1);
 }
 
-/* Кастомные утилиты */
-.text-ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+/* Белый текст для всех элементов сайдбара */
+.sidebar-header span,
+.sidebar-header div,
+.nav-link,
+.nav-link span,
+.user-info .text-white,
+.user-info .text-white-50,
+.btn-logout span {
+    color: white !important;
 }
 
-.cursor-pointer {
-    cursor: pointer;
+/* Активный пункт меню */
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-left: 3px solid #0d6efd;
 }
 
-/* Загрузка */
-.loading {
-    position: relative;
-    opacity: 0.6;
-    pointer-events: none;
+/* Иконки в сайдбаре */
+.nav-link i {
+    color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    margin: -10px 0 0 -10px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+.nav-link:hover i,
+.nav-link.active i {
+    color: white !important;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* Светло-серый текст для подсказок */
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Ховер эффекты */
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Кнопка выхода */
+.btn-logout {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.btn-logout:hover {
+    background: rgba(220, 53, 69, 0.2) !important;
+    border-color: rgba(220, 53, 69, 0.5) !important;
+}
+
+/* Мобильное меню - белый текст */
+.mobile-menu .navbar-brand,
+.mobile-menu .offcanvas-title,
+.mobile-menu .nav-link,
+.mobile-menu .fw-semibold {
+    color: white !important;
+}
+/* Уменьшение расстояний между пунктами меню в сайдбаре */
+.sidebar-fixed .nav-pills {
+    padding: 0 1rem;
+}
+
+.sidebar-fixed .nav-item {
+    margin-bottom: 2px !important; /* Уменьшаем отступ снизу */
+}
+
+.sidebar-fixed .nav-link {
+    padding: 0.5rem 0.75rem !important; /* Уменьшаем padding */
+    margin-bottom: 2px !important; /* Минимальный отступ */
+    border-radius: 4px !important; /* Чуть меньше скругление */
+}
+
+.sidebar-fixed .nav-link i {
+    width: 20px !important; /* Уменьшаем ширину иконки */
+    margin-right: 0.5rem !important; /* Уменьшаем отступ справа от иконки */
+    font-size: 1rem !important; /* Немного уменьшаем размер иконки */
+}
+
+.sidebar-fixed .nav-link span {
+    font-size: 0.9rem !important; /* Чуть уменьшаем размер текста */
+}
+
+/* Для мобильного меню тоже */
+.mobile-menu .nav-item {
+    margin-bottom: 2px !important;
+}
+
+.mobile-menu .nav-link {
+    padding: 0.5rem 0.75rem !important;
+    margin-bottom: 2px !important;
+}
+
+/* Бейджи внутри пунктов меню */
+.sidebar-fixed .nav-link .badge {
+    margin-left: auto;
+    font-size: 0.65rem !important; /* Уменьшаем размер бейджа */
+    padding: 0.15rem 0.35rem !important; /* Уменьшаем padding бейджа */
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Уменьшаем отступы в блоке пользователя */
+.user-info {
+    padding: 0.75rem !important; /* Уменьшаем padding */
+    margin: 0.75rem !important; /* Уменьшаем margin */
+}
+
+/* Уменьшаем кнопку выхода */
+.btn-logout {
+    margin: 0.75rem !important; /* Уменьшаем margin */
+    padding: 0.4rem !important; /* Уменьшаем padding */
+    font-size: 0.85rem !important; /* Уменьшаем размер текста */
 }

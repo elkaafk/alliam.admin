@@ -11,7 +11,7 @@ if (!isset($page_title)) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?= htmlspecialchars($page_title) ?> | Alliam.Online Admin</title>
+        <title><?= htmlspecialchars($page_title) ?> | АЛЛИАМ.АДМИН</title>
 
         <!-- Bootstrap 5 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,10 @@ if (!isset($page_title)) {
         <!-- Bootstrap Icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-        <!-- DataTables -->
+        <!-- Google Fonts: Inter -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- DataTables (будет нужен позже) -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
         <!-- Custom CSS -->
@@ -28,7 +31,7 @@ if (!isset($page_title)) {
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>assets/img/favicon.ico">
 
-        <!-- Scripts в head для некоторых библиотек -->
+        <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 <body>
@@ -54,15 +57,6 @@ if (!isset($page_title)) {
     <!-- Уведомления -->
     <div id="notificationArea" class="position-fixed top-0 end-0 p-3" style="z-index: 9999"></div>
 
-    <!-- Основной контейнер -->
-<div class="container-fluid">
-    <div class="row">
-    <!-- Sidebar будет подключаться отдельно -->
 <?php if (!isset($hide_sidebar) || !$hide_sidebar): ?>
-    <div class="col-md-3 col-lg-2 px-0">
-        <?php include INCLUDES_PATH . '/sidebar.php'; ?>
-    </div>
-    <main class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
-<?php else: ?>
-    <main class="col-12 px-0">
+    <?php include INCLUDES_PATH . '/sidebar.php'; ?>
 <?php endif; ?>

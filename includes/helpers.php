@@ -63,18 +63,7 @@ function get_initials($last_name, $first_name, $middle_name = '') {
     return $initials;
 }
 
-/**
- * Генерация аватарки по умолчанию
- */
-function generate_avatar($name, $size = 40) {
-    // Простая генерация цветного круга с инициалами
-    $colors = ['#007bff', '#28a745', '#dc3545', '#ffc107', '#17a2b8', '#6c757d'];
-    $color = $colors[crc32($name) % count($colors)];
 
-    $initials = get_initials(...explode(' ', $name));
-
-    return '<div class="avatar-circle" style="width: ' . $size . 'px; height: ' . $size . 'px; background-color: ' . $color . '; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: ' . ($size / 2.5) . 'px;">' . $initials . '</div>';
-}
 
 /**
  * Проверка формата email
@@ -95,19 +84,7 @@ function redirect_with_message($url, $type, $message) {
     exit;
 }
 
-/**
- * Отображение флеш-сообщения
- */
-function display_flash_message() {
-    if (isset($_SESSION['flash_message'])) {
-        $message = $_SESSION['flash_message'];
-        unset($_SESSION['flash_message']);
 
-        $alert_class = 'alert-' . $message['type'];
-        return '<div class="alert ' . $alert_class . ' alert-dismissible fade show" role="alert">' . htmlspecialchars($message['text']) . '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-    }
-    return '';
-}
 
 /**
  * Получение текущего URL
@@ -116,12 +93,7 @@ function current_url() {
     return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
 
-/**
- * Проверка AJAX запроса
- */
-function is_ajax_request() {
-    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-}
+
 
 /**
  * Генерация токена CSRF

@@ -132,13 +132,20 @@ function has_permission($required_role, $current_role = null) {
  * Выход из системы
  */
 function admin_logout() {
-    if (isset($_SESSION['admin_id'])) {
-        log_admin_activity($_SESSION['admin_id'], 'logout', 'system');
+    // Очищаем все данные сессии
+    $_SESSION = array();
+
+    // Удаляем куки сессии, если она используется
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
     }
 
-    session_unset();
+    // Уничтожаем сессию
     session_destroy();
-    session_start();
 }
 
 /**
