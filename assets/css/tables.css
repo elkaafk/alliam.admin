@@ -1,0 +1,56 @@
+/**
+ * Стили для таблиц
+ */
+
+.dataTables_wrapper {
+    padding: 0;
+}
+
+.dataTables_length select {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+}
+
+.dataTables_filter input {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    margin-left: 0.5rem;
+}
+
+.table-actions {
+    white-space: nowrap;
+}
+
+.table-actions .btn {
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.25rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Стили для статусов в таблице */
+.status-cell {
+    min-width: 100px;
+}
+
+/* Адаптивные таблицы */
+@media (max-width: 768px) {
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        float: none;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        margin-top: 0.5rem;
+    }
+}
